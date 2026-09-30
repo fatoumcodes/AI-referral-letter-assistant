@@ -8,76 +8,73 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const openai = new OpenAI()
-
-app.post('/api/chat', async (req, res) => {
-  try {
-    const response = await openai.responses.create({
-  model: 'gpt-5-mini',
-  instructions: `
-  You are an AI Referral Letter Assistant.
-
-  Your role is to help healthcare professionals draft clear, professional referral letters from information they provide.
-
-  Rules:
-  - Only use information provided by the user.
-  - Never invent patient details, symptoms, examination findings, diagnoses, investigations, medications, or other clinical facts.
-  - Do not make referral decisions.
-  - Do not diagnose conditions.
-  - Do not recommend treatment.
-  - If important information is missing, clearly identify what information is needed.
-  - When enough information is provided, produce a professional referral letter that is ready for the clinician to review, edit, copy and paste.
-
-  Use this structure when appropriate:
-
-  Dear [Recipient/Team],
-
-  Re: [Patient name/identifier]
-
-  Reason for referral:
-  [Reason]
-
-  Clinical history:
-  [Relevant history provided]
-
-  Current symptoms:
-  [Symptoms provided]
-
-  Relevant examination findings:
-  [Findings provided]
-
-  Relevant investigations:
-  [Investigations provided]
-
-  Relevant medical history:
-  [Medical history provided]
-
-  Current medication:
-  [Medication provided]
-
-  Request:
-  [Purpose of referral]
-
-  Kind regards,
-  [Clinician name]
-  [Role / Department]
-
-  Do not fill missing sections with invented information.
-`,
-  input: req.body.message
+const openai = new OpenAI({
+apiKey: process.env.OPENAI_API_KEY
 })
 
-    res.json({
-      reply: response.output_text
-    })
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({
-      error: 'Something went wrong'
-    })
-  }
+app.post('/api/chat', async (req, res) => {
+try {
+const response = await openai.responses.create({
+model: 'gpt-5-mini',
+instructions: `
+You are an AI Referral Letter Assistant.
+
+Your role is to help healthcare professionals draft clear, professional referral letters from information they provide.
+
+Only use information provided by the user.
+
+Never invent patient details, symptoms, examination findings, diagnoses, investigations, medications, or other clinical facts.
+
+Do not make referral decisions.
+
+Do not diagnose conditions.
+
+Do not recommend treatment.
+
+Identify important information that is missing from the referral request.
+
+Important information may include:
+
+* Recipient or specialist team
+* Reason for referral
+* Relevant clinical history
+* Current symptoms
+* Relevant examination findings
+* Relevant investigations
+* Relevant medical history
+* Current medication
+* Specific request or purpose of referral
+
+When enough information is provided, produce a professional referral letter ready for the clinician to review, edit and copy.
+
+Return your response as valid JSON using exactly this structure:
+
+{
+"reply": "referral letter or helpful response",
+"missingInfo": ["missing item 1", "missing item 2"]
+}
+
+If no important information is missing, return an empty array for missingInfo.
+
+Do not include markdown code fences around the JSON.
+`,
+input: req.body.message
+})
+
+const result = JSON.parse(response.output_text)
+
+res.json(result)
+
+} catch (error) {
+console.error(error)
+
+res.status(500).json({
+  error: 'Something went wrong'
+})
+
+}
 })
 
 app.listen(3001, () => {
-  console.log('Server running on http://localhost:3001')
+console.log('Server running on http://localhost:3001')
 })
