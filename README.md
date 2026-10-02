@@ -1,16 +1,64 @@
-# React + Vite
+## ReferralAI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## AI-Assisted Referral Letter Drafting
 
-Currently, two official plugins are available:
+ReferralAI is a full-stack AI application that helps healthcare professionals structure referral letters from **anonymised clinical information**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Built as part of my transition from healthcare into **AI and software engineering**, combining my healthcare background with React, JavaScript and LLM development.
 
-## React Compiler
+**Privacy:** Use anonymised or pseudonymised information only. Never enter patient names, NHS numbers or other identifying information.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features:
 
-## Expanding the ESLint configuration
+- 🤖 AI-assisted referral letter generation
+- 🔎 Missing-information detection
+- 📋 Copy generated letters
+- 🎙️ Voice input
+- 📱 Responsive design
+- 🔒 Clinician-review and privacy reminders
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+**Frontend:** React, JavaScript, CSS, Vite
+**Backend:** Node.js, Express
+**AI:** OpenAI API
+**Tools:** Git, GitHub, npm
+
+## How It Works
+
+1. Enter anonymised clinical information.
+2. ReferralAI identifies missing information.
+3. The AI structures the referral letter.
+4. The clinician reviews and edits the result.
+5. Copy the completed letter.
+
+## AI Safety
+
+ReferralAI is an **AI-assisted drafting tool**, not a clinical decision-making system.
+
+It does not:
+
+* Diagnose conditions
+* Recommend treatment
+* Make referral decisions
+* Invent clinical information
+
+The prototype is not connected to NHS systems.
+
+## What I Built & Learned
+
+This project gave me hands-on experience with:
+
+**React • APIs • Async JavaScript • Express • OpenAI integration • JSON • Voice APIs • Responsive CSS • Git/GitHub**
+
+It also allowed me to explore how AI can be designed around a specific professional workflow rather than as a generic chatbot.
+
+##  Disclaimer
+
+Portfolio prototype for demonstration and educational purposes.
+**Never enter identifiable patient information.**
+
+## 🔗 Links
+
+* **Live Demo:** Coming soon
+* **GitHub:** Coming soon
