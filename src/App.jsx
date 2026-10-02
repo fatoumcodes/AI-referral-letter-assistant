@@ -118,6 +118,12 @@ function App() {
     <div className="chat-container">
       <h1>ReferralAI</h1>
       <p className="subtitle">AI-assisted referral drafting</p>
+      <p className="safety-indicator">
+        AI-assisted drafting • Clinician review required
+      </p>
+      <p className="privacy-indicator">
+        🔒 Use anonymised or pseudonymised patient information only. Do not enter names, NHS numbers or other identifying details.
+      </p>
 
       <div>
         {messages.length === 0 && (
@@ -132,22 +138,28 @@ function App() {
 
         {missingInfo.length > 0 && (
           <div className="missing-info">
-            <h3>Missing information</h3>
-            <p>Click an item to add the information.</p>
-
-            <div className="missing-info-list">
-              {missingInfo.map((item, index) => (
-                <button
-                  className="missing-info-item"
-                  key={index}
-                  onClick={() => handleMissingInfoClick(item)}
-                >
-                  {item}
-                </button>
-              ))}
+            <div className="missing-info-header">
+             <div>
+                  <h3>Missing information</h3>
+                   <p>A few details are still needed to complete the referral.</p>
             </div>
           </div>
-        )}
+
+    <div className="missing-info-list">
+      {missingInfo.map((item, index) => (
+        <button
+          className="missing-info-item"
+          key={index}
+          onClick={() => handleMissingInfoClick(item)}
+        >
+          <span className="missing-info-icon">○</span>
+          <span>{item}</span>
+          <span className="missing-info-arrow">→</span>
+        </button>
+      ))}
+    </div>
+  </div>
+)}
 
         {messages.map((message, index) => (
           <div className={message.role} key={index}>
